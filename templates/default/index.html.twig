@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Username: {{ app.user.username }}</p>
+    {% endif %}
+    <div class="container pb-5 mb-5">
+    {% if product is defined  %}
+        <div class="row px-2">
+            {% for p in product %}
+                <div class="col-lg-3 col-md-4 col-12 px-2">
+                    <div class="card">
+                        <img src="/uploads/{{ p.images[0].name }}" class="card-img-top" alt="{{ p.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title" style="min-height: 72px">{{ p.name }}</h5>
+                            <p class="card-text" style="min-height: 120px">{{ p.description[:100] ~ '...' }}</p>
+                            <span class="text-success">{{ p.price|number_format(2, ',', '.') }} TL</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
